@@ -1,0 +1,64 @@
+{
+    "command": "/usr/sbin/rabbitmq-server",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq-env.conf",
+            "dest": "/etc/rabbitmq/rabbitmq-env.conf",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq.conf",
+            "dest": "/etc/rabbitmq/rabbitmq.conf",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/erl_inetrc",
+            "dest": "/etc/rabbitmq/erl_inetrc",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/advanced.config",
+            "dest": "/etc/rabbitmq/advanced.config",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/definitions.json",
+            "dest": "/etc/rabbitmq/definitions.json",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/enabled_plugins",
+            "dest": "/etc/rabbitmq/enabled_plugins",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq-cert.pem",
+            "dest": "/etc/rabbitmq/certs/rabbitmq-cert.pem",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq-key.pem",
+            "dest": "/etc/rabbitmq/certs/rabbitmq-key.pem",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        }    ],
+    "permissions": [
+        {
+            "path": "/var/lib/rabbitmq",
+            "owner": "rabbitmq:rabbitmq",
+            "recurse": true
+        },
+        {
+            "path": "/var/log/kolla/rabbitmq",
+            "owner": "rabbitmq:rabbitmq",
+            "recurse": true
+        }
+    ]
+}

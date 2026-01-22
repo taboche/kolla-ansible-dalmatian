@@ -1,0 +1,32 @@
+#!/bin/bash -x
+
+if [ ! -e "/etc/haproxy/certificates/haproxy.pem" ]; then
+    # Generate temporary self-signed cert
+    # This means external tls is enabled but the certificate was not copied
+    # to the container - so letsencrypt is enabled
+    #
+    # Let's generate certificate to make haproxy happy, lego will
+    # replace it in a while
+    ssl_tmp_dir=$(mktemp -d)
+    openssl req -x509 -newkey rsa:2048 -sha256 -days 1 -nodes -keyout ${ssl_tmp_dir}/haproxy$$.key -out ${ssl_tmp_dir}/haproxy$$.crt -subj "/CN=192.168.3.13"
+    cat ${ssl_tmp_dir}/haproxy$$.crt ${ssl_tmp_dir}/haproxy$$.key> /etc/haproxy/certificates/haproxy.pem
+    rm -rf ${ssl_tmp_dir}
+    chown haproxy:haproxy /etc/haproxy/certificates/haproxy.pem
+    chmod 0660 /etc/haproxy/certificates/haproxy.pem
+fi
+if [ ! -e "/etc/haproxy/certificates/haproxy-internal.pem" ]; then
+    # Generate temporary self-signed cert
+    # This means external tls is enabled but the certificate was not copied
+    # to the container - so letsencrypt is enabled
+    #
+    # Let's generate certificate to make haproxy happy, lego will
+    # replace it in a while
+    ssl_tmp_dir=$(mktemp -d)
+    openssl req -x509 -newkey rsa:2048 -sha256 -days 1 -nodes -keyout ${ssl_tmp_dir}/haproxy-internal$$.key -out ${ssl_tmp_dir}/haproxy-internal$$.crt -subj "/CN=192.168.3.14"
+    cat ${ssl_tmp_dir}/haproxy-internal$$.crt ${ssl_tmp_dir}/haproxy-internal$$.key> /etc/haproxy/certificates/haproxy-internal.pem
+    rm -rf ${ssl_tmp_dir}
+    chown haproxy:haproxy /etc/haproxy/certificates/haproxy-internal.pem
+    chmod 0660 /etc/haproxy/certificates/haproxy-internal.pem
+fi
+
+exec /usr/sbin/haproxy -W -db -p /run/haproxy.pid -f /etc/haproxy/haproxy.cfg -f /etc/haproxy/services.d/

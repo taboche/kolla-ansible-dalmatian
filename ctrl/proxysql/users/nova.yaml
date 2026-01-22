@@ -1,0 +1,24 @@
+# This configuration file is used to configure proxysql users,
+# in our case we just define default_hostgroup and the mysql galera
+# cluster group where user is routed to.
+#
+# This is used especially when services are creating databases, users
+# and connects via user 'root_shard_SHARD_ID', so ProxySQL know
+# where to route this query.
+#
+# Table mysql_users defines MySQL users that clients can use to connect to
+# ProxySQL, and then used to connect to backends.
+#
+# ProxySQL Admin> SHOW CREATE TABLE mysql_users\G
+#
+# https://proxysql.com/documentation/main-runtime/#mysql_users
+
+mysql_users:
+  - username: "nova"
+    password: "5BDEFt4Rm5WHDPB2lCxb0cKkxNGUlgk4iFvj69yl"
+    transaction_persistent: 1
+    active: 1
+  - username: "nova_api"
+    password: "Ok64PN6UhRFC7P9V2gRQmEBn7f6z4oTa0SHG95K7"
+    transaction_persistent: 1
+    active: 1

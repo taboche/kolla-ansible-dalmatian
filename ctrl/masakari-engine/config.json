@@ -1,0 +1,22 @@
+{
+    "command": "masakari-engine --config-file /etc/masakari/masakari.conf",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/masakari.conf",
+            "dest": "/etc/masakari/masakari.conf",
+            "owner": "masakari",
+            "perm": "0600"
+        }    ],
+    "permissions": [
+        {
+            "path": "/var/lib/masakari",
+            "owner": "masakari:masakari",
+            "recurse": true
+        },
+        {
+            "path": "/var/log/kolla/masakari",
+            "owner": "masakari:masakari",
+            "recurse": true
+        }
+    ]
+}

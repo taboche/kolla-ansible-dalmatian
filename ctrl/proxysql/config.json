@@ -1,0 +1,65 @@
+{
+    "command": "/etc/proxysql_run.sh",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/proxysql_run.sh",
+            "dest": "/etc/proxysql_run.sh",
+            "owner": "proxysql",
+            "perm": "0700"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/proxysql.yaml",
+            "dest": "/etc/proxysql/proxysql.yaml",
+            "owner": "proxysql",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/users/",
+            "dest": "/etc/proxysql/users",
+            "owner": "proxysql",
+            "perm": "0700"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/rules/",
+            "dest": "/etc/proxysql/rules",
+            "owner": "proxysql",
+            "perm": "0700"
+        }
+        ,
+        {
+            "source": "/var/lib/kolla/config_files/ca-certificates/root.crt",
+            "dest": "/etc/proxysql/certs/root.crt",
+            "owner": "proxysql",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/mariadb-cert.pem",
+            "dest": "/etc/proxysql/certs/mariadb-cert.pem",
+            "owner": "proxysql",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/mariadb-key.pem",
+            "dest": "/etc/proxysql/certs/mariadb-key.pem",
+            "owner": "proxysql",
+            "perm": "0600"
+        }        ,
+        {
+            "source": "/var/lib/kolla/config_files/ca-certificates/root.crt",
+            "dest": "/var/lib/proxysql/proxysql-ca.pem",
+            "owner": "proxysql",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/proxysql-cert.pem",
+            "dest": "/var/lib/proxysql/proxysql-cert.pem",
+            "owner": "proxysql",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/proxysql-key.pem",
+            "dest": "/var/lib/proxysql/proxysql-key.pem",
+            "owner": "proxysql",
+            "perm": "0600"
+        }    ]
+}

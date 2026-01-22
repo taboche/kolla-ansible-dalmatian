@@ -1,0 +1,45 @@
+{
+    "command": "uwsgi --master --emperor /etc/barbican/vassals --logto /var/log/kolla/barbican/barbican_api_uwsgi_access.log --logfile-chmod 644",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/barbican.conf",
+            "dest": "/etc/barbican/barbican.conf",
+            "owner": "barbican",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/vassals/barbican-api.ini",
+            "dest": "/etc/barbican/vassals/barbican-api.ini",
+            "owner": "barbican",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/barbican-api-paste.ini",
+            "dest": "/etc/barbican/barbican-api-paste.ini",
+            "owner": "barbican",
+            "perm": "0600",
+            "optional": true
+        },
+        {
+            "source": "/var/lib/kolla/config_files/barbican-cert.pem",
+            "dest": "/etc/barbican/certs/barbican-cert.pem",
+            "owner": "barbican",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/barbican-key.pem",
+            "dest": "/etc/barbican/certs/barbican-key.pem",
+            "owner": "barbican",
+            "perm": "0600"
+        }    ],
+    "permissions": [
+       {
+            "path": "/var/lib/barbican",
+            "owner": "barbican:barbican"
+       },
+       {
+            "path": "/var/log/kolla/barbican",
+            "owner": "barbican:barbican"
+       }
+    ]
+}

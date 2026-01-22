@@ -1,0 +1,29 @@
+{
+    "command": "kolla_toolbox",
+    "config_files": [
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq-erlang.cookie",
+            "dest": "/var/lib/rabbitmq/.erlang.cookie",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/rabbitmq-env.conf",
+            "dest": "/etc/rabbitmq/rabbitmq-env.conf",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        },
+        {
+            "source": "/var/lib/kolla/config_files/erl_inetrc",
+            "dest": "/etc/rabbitmq/erl_inetrc",
+            "owner": "rabbitmq",
+            "perm": "0600"
+        }    ],
+    "permissions": [
+        {
+            "path": "/var/log/kolla/ansible.log",
+            "perm": "0664",
+            "owner": "ansible:kolla"
+        }
+    ]
+}

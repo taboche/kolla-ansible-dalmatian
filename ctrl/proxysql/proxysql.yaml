@@ -1,0 +1,78 @@
+# This configuration file is used to configure proxysql.
+#
+# Admin_variables: https://proxysql.com/documentation/global-variables/admin-variables
+# Mysql_variables: https://proxysql.com/documentation/global-variables/mysql-variables
+# Mysql_servers: https://proxysql.com/documentation/main-runtime/#mysql_servers
+# Mysql_galera_hostgroups: https://proxysql.com/documentation/main-runtime/#mysql_galera_hostgroups
+
+datadir: "/var/lib/proxysql"
+errorlog: "/var/log/kolla/proxysql/proxysql.log"
+
+admin_variables:
+   admin_credentials: "kolla-admin:AIlPV3fsWz4d2NEGEEH6gBjepmQgl51MAaeC2Rww"
+   mysql_ifaces: "192.168.3.10:6032;192.168.3.14:6032;/var/lib/kolla/proxysql/admin.sock"
+   stats_credentials: "kolla-stats:Nv04GC05lcLBMxSpmwQX42fpqiHsU5QM7K8ATgVD"
+   restapi_enabled: "False"
+   restapi_port: "6070"
+   prometheus_memory_metrics_interval: "60"
+
+mysql_variables:
+   threads: 5
+   max_connections: 40000
+   interfaces: "192.168.3.14:3306"
+   connect_retries_delay: "1"
+   connect_retries_on_failure: "10"
+   shun_on_failures: "5"
+   monitor_username: "monitor"
+   monitor_password: "rfewyvbhqOU2WqNuCeUTbqL5dKSnCwYmxggwWtSi"
+   monitor_connect_interval: "2000"
+   monitor_galera_healthcheck_interval: "4000"
+   monitor_galera_healthcheck_timeout: "1000"
+   monitor_galera_healthcheck_max_timeout_count: "2"
+   monitor_ping_interval: "3000"
+   monitor_ping_timeout: "2000"
+   monitor_ping_max_failures: "2"
+   monitor_connect_timeout: 6000
+   connect_timeout_client: 100000
+   connect_timeout_server: 30000
+   connect_timeout_server_max: 100000
+   ssl_p2s_ca: "/etc/proxysql/certs/root.crt"
+   ssl_p2s_cert: "/etc/proxysql/certs/mariadb-cert.pem"
+   ssl_p2s_key: "/etc/proxysql/certs/mariadb-key.pem"
+   have_ssl: true
+
+mysql_servers:
+  - address: "192.168.3.10"
+    port :  3306
+    hostgroup :  0
+    max_connections: 10000
+    max_replication_lag: 0
+    weight :  100
+    comment :  "Writer infra1"
+    use_ssl: 1
+  - address: "192.168.3.11"
+    port :  3306
+    hostgroup :  0
+    max_connections: 10000
+    max_replication_lag: 0
+    weight :  10
+    comment :  "Writer infra2"
+    use_ssl: 1
+  - address: "192.168.3.12"
+    port :  3306
+    hostgroup :  0
+    max_connections: 10000
+    max_replication_lag: 0
+    weight :  10
+    comment :  "Writer infra3"
+    use_ssl: 1
+
+mysql_galera_hostgroups:
+  - writer_hostgroup: 0
+    backup_writer_hostgroup: 1
+    reader_hostgroup: 2
+    offline_hostgroup: 3
+    max_connections: 10000
+    max_writers: 1
+    writer_is_also_reader: 0
+    comment: "Galera cluster for shard 0"
