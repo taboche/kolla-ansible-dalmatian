@@ -22,6 +22,7 @@ openstack:
     key-manager: barbican
     network: neutron
     placement: placement
+    volumev3: cinder
   sso_enabled: false
   system_admin_roles:
   - admin
